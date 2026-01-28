@@ -51,7 +51,6 @@
             color: #aaa;
             font-size: 16px;
             cursor: pointer;
-            padding-bottom: 5px;
         }
 
         .tabs button.active {
@@ -93,11 +92,10 @@
             background: #cc0000;
         }
 
-        .footer-text {
+        .msg {
+            margin-top: 10px;
+            font-size: 14px;
             text-align: center;
-            margin-top: 15px;
-            font-size: 12px;
-            color: #666;
         }
     </style>
 </head>
@@ -114,26 +112,27 @@
         <button id="registerTab" onclick="showRegister()">Register</button>
     </div>
 
+    <!-- Login -->
     <div id="loginForm" class="form active">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button onclick="goHome()">Login</button>
+        <input type="text" id="loginUser" placeholder="Username">
+        <input type="password" id="loginPass" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div class="msg" id="loginMsg"></div>
     </div>
 
+    <!-- Register -->
     <div id="registerForm" class="form">
-        <input type="text" placeholder="Username">
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm Password">
-        <button onclick="goHome()">Register</button>
-    </div>
-
-    <div class="footer-text">
-        © 2026 Southside Roleplay
+        <input type="text" id="regUser" placeholder="Username">
+        <input type="password" id="regPass" placeholder="Password">
+        <input type="password" id="regPass2" placeholder="Confirm Password">
+        <button onclick="register()">Register</button>
+        <div class="msg" id="regMsg"></div>
     </div>
 </div>
 
 <script>
+    const users = JSON.parse(localStorage.getItem("users")) || {};
+
     function showLogin() {
         loginForm.classList.add("active");
         registerForm.classList.remove("active");
@@ -148,8 +147,64 @@
         loginTab.classList.remove("active");
     }
 
-    function goHome() {
-        window.location.href = "home.html";
+    function register() {
+        const user = regUser.value.trim();
+        const pass = regPass.value;
+        const pass2 = regPass2.value;
+        const msg = document.getElementById("regMsg");
+
+        if (!user || !pass) {
+            msg.style.color = "orange";
+            msg.innerText = "All fields required";
+            return;
+        }
+
+        if (pass !== pass2) {
+            msg.style.color = "orange";
+            msg.innerText = "Passwords do not match";
+            return;
+        }
+
+        if (users[user]) {
+            msg.style.color = "red";
+            msg.innerText = "Username already registered";
+            return;
+        }
+
+        users[user] = pass;
+        localStorage.setItem("users", JSON.stringify(users));
+
+        msg.style.color = "lightgreen";
+        msg.innerText = "Registered successfully! Redirecting...";
+
+        setTimeout(() => {
+            window.location.href = "home.html";
+        }, 1000);
+    }
+
+    function login() {
+        const user = loginUser.value.trim();
+        const pass = loginPass.value;
+        const msg = document.getElementById("loginMsg");
+
+        if (!users[user]) {
+            msg.style.color = "red";
+            msg.innerText = "User not registered";
+            return;
+        }
+
+        if (users[user] !== pass) {
+            msg.style.color = "red";
+            msg.innerText = "Incorrect password";
+            return;
+        }
+
+        msg.style.color = "lightgreen";
+        msg.innerText = "Login successful! Redirecting...";
+
+        setTimeout(() => {
+            window.location.href = "home.html";
+        }, 1000);
     }
 </script>
 
