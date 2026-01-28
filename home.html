@@ -23,13 +23,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 40px;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             border-bottom: 1px solid red;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         header h2 {
             color: red;
             letter-spacing: 2px;
+            text-shadow: 0 0 10px red;
         }
 
         nav a {
@@ -46,22 +50,21 @@
 
         /* HERO */
         .hero {
-        height: 90vh;
-        background:
-            linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-            url("https://images.alphacoders.com/116/1161813.jpg") center/cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+            height: 90vh;
+            background:
+                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                url("https://images.alphacoders.com/116/1161813.jpg") center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
-
 
         .hero h1 {
             font-size: 60px;
             color: red;
-            text-shadow: 0 0 20px red;
+            text-shadow: 0 0 25px red;
         }
 
         .hero p {
@@ -75,29 +78,31 @@
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-top: -80px;
-            padding-bottom: 80px;
+            margin-top: -90px;
+            padding: 40px;
+            flex-wrap: wrap;
         }
 
         .card {
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             border: 1px solid red;
-            width: 250px;
+            width: 260px;
             padding: 25px;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 0 20px rgba(255,0,0,0.4);
             transition: 0.3s;
         }
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 0 35px rgba(255,0,0,0.8);
+            box-shadow: 0 0 40px rgba(255,0,0,0.9);
         }
 
         .card h3 {
             color: red;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px red;
         }
 
         .card p {
@@ -107,7 +112,7 @@
 
         /* SECTION */
         .section {
-            padding: 60px 40px;
+            padding: 70px 40px;
             text-align: center;
             border-top: 1px solid #222;
         }
@@ -115,13 +120,34 @@
         .section h2 {
             color: red;
             margin-bottom: 15px;
-            text-shadow: 0 0 10px red;
+            text-shadow: 0 0 15px red;
         }
 
         .section p {
             color: #aaa;
-            max-width: 700px;
+            max-width: 800px;
             margin: auto;
+            line-height: 1.6;
+        }
+
+        /* JOIN BUTTON */
+        .join-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 40px;
+            border: 2px solid red;
+            color: red;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255,0,0,0.6);
+        }
+
+        .join-btn:hover {
+            background: red;
+            color: #000;
+            box-shadow: 0 0 40px red;
         }
 
         /* FOOTER */
@@ -143,17 +169,17 @@
         <a href="#">Factions</a>
         <a href="#">Admin Team</a>
         <a href="#">Community</a>
-        <a href="#">Logout</a>
+        <a href="index.html">Logout</a>
     </nav>
 </header>
 
 <!-- HERO -->
 <div class="hero">
     <h1>SOUTHSIDE ROLEPLAY</h1>
-    <p>Next Generation Serious Roleplay Experience</p>
+    <p>Next Generation FiveM Roleplay Experience</p>
 </div>
 
-<!-- SERVER INFO CARDS -->
+<!-- INFO CARDS -->
 <div class="cards">
     <div class="card">
         <h3>Server Name</h3>
@@ -162,22 +188,42 @@
 
     <div class="card">
         <h3>Players Online</h3>
-        <p id="players">124 / 256</p>
+        <p id="players">120 / 256</p>
     </div>
 
     <div class="card">
         <h3>Server IP</h3>
         <p>connect southside-rp.lk</p>
     </div>
+
+    <div class="card">
+        <h3>Server Type</h3>
+        <p>Serious Roleplay</p>
+    </div>
+
+    <div class="card">
+        <h3>Discord Members</h3>
+        <p id="discord">3,450 Members</p>
+    </div>
+
+    <div class="card">
+        <h3>Whitelist Status</h3>
+        <p style="color: lightgreen;">OPEN</p>
+    </div>
 </div>
 
 <!-- ABOUT -->
 <div class="section">
-    <h2>About Southside RP</h2>
+    <h2>About Southside Roleplay</h2>
     <p>
-        Southside Roleplay is a FiveM-based serious roleplay server with realistic
-        systems, active staff team, gangs, police, EMS and immersive gameplay.
+        Southside Roleplay is a serious FiveM roleplay server focused on realism,
+        quality roleplay and a friendly community. Join gangs, police, EMS or live
+        a civilian life in Los Santos.
     </p>
+
+    <a class="join-btn" href="fivem://connect/southside-rp.lk">
+        JOIN SERVER
+    </a>
 </div>
 
 <footer>
@@ -185,14 +231,21 @@
 </footer>
 
 <script>
-    // Demo player count animation
-    let count = 120;
+    // Players demo count
+    let players = 120;
     setInterval(() => {
-        count = count + Math.floor(Math.random() * 3 - 1);
-        if (count < 100) count = 100;
-        if (count > 180) count = 180;
-        document.getElementById("players").innerText = count + " / 256";
+        players += Math.floor(Math.random() * 3 - 1);
+        if (players < 100) players = 100;
+        if (players > 200) players = 200;
+        document.getElementById("players").innerText = players + " / 256";
     }, 2000);
+
+    // Discord demo count
+    let discord = 3450;
+    setInterval(() => {
+        discord += Math.floor(Math.random() * 2);
+        document.getElementById("discord").innerText = discord + " Members";
+    }, 4000);
 </script>
 
 </body>
