@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSRP | Police Department Apply</title>
+
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial;
+        }
+
+        .box {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #0b0b0b;
+            padding: 30px;
+            border: 1px solid red;
+            border-radius: 12px;
+            box-shadow: 0 0 30px red;
+        }
+
+        h2 {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px red;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: red;
+            color: #000;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 20px red;
+        }
+
+        button:hover {
+            box-shadow: 0 0 40px red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>SSRP | POLICE DEPARTMENT APPLY</h2>
+
+    <form onsubmit="sendMail(event)">
+        <input required placeholder="OOC Full Name" id="oocname">
+        <input required placeholder="OOC Age" id="oocage">
+        <input required placeholder="IC Name" id="icname">
+        <input required placeholder="IC Age" id="icage">
+
+        <textarea required placeholder="Kalin mema faction eke wenath city wala idala thiyeda" id="q1"></textarea>
+        <textarea required placeholder="Me faction eka sadaha oba sudusukam labanne keseda" id="q2"></textarea>
+        <textarea required placeholder="Oba apage faction ekek sewaya karanne kohomada" id="q3"></textarea>
+
+        <input required placeholder="WhatsApp Number" id="whatsapp">
+        <input required type="email" placeholder="Working Email" id="email">
+
+        <button type="submit">Submit Application</button>
+    </form>
+</div>
+
+<script>
+function sendMail(e) {
+    e.preventDefault();
+
+    let body =
+`Faction: POLICE DEPARTMENT
+
+OOC Name: ${oocname.value}
+OOC Age: ${oocage.value}
+
+IC Name: ${icname.value}
+IC Age: ${icage.value}
+
+Experience: ${q1.value}
+Why Eligible: ${q2.value}
+How Serve: ${q3.value}
+
+WhatsApp: ${whatsapp.value}
+Email: ${email.value}`;
+
+    window.location.href =
+        "mailto:heavencityrp999@gmail.com" +
+        "?subject=SSRP Police Department Application" +
+        "&body=" + encodeURIComponent(body);
+}
+</script>
+
+</body>
+</html>
